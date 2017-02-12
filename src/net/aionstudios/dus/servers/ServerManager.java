@@ -17,5 +17,30 @@ public class ServerManager {
 	public static ExecutorService getExecutor() {
 		return executor;
 	}
+	
+	public static DedicatedServer getServer(int serverNumber){
+		if(!dsList.isEmpty()){
+			return dsList.get(serverNumber);
+		}
+		return null;
+	}
+	
+	public static DedicatedServer getServer(String name){
+		for(DedicatedServer s : dsList){
+			if(s.getName()==name){
+				return s;
+			}
+		}
+		return null;
+	}
 
+	public static DedicatedServer getServer(DedicatedServer server){
+		for(DedicatedServer s : dsList){
+			if(s==server){
+				return s;
+			}
+		}
+		return null;
+	}
+	
 }

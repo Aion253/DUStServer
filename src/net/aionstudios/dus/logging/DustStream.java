@@ -2,10 +2,10 @@ package net.aionstudios.dus.logging;
 
 import java.io.PrintStream;
 
-public class ServerStream extends PrintStream {
+public class DustStream extends PrintStream {
 
-	public ServerStream() {
-		super(System.out, true);
+	public DustStream() {
+		super(Logger.getStream(), true);
 	}
 	
 	@Override

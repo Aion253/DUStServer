@@ -2,9 +2,9 @@ package net.aionstudios.dus.logging;
 
 import java.io.PrintStream;
 
-public class ServerErrStream extends PrintStream {
+public class DustErrStream extends PrintStream {
 
-	public ServerErrStream() {
+	public DustErrStream() {
 		super(Logger.getStream(), true);
 	}
 	
