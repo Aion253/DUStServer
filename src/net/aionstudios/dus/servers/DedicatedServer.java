@@ -12,7 +12,7 @@ import java.io.OutputStreamWriter;
 import net.aionstudios.dus.Dust;
 import net.aionstudios.ndf.ANDFTree;
 
-public abstract class DedicatedServer {
+public class DedicatedServer {
 	
 	private String config;
 	private ANDFTree serverConfig;
@@ -32,6 +32,7 @@ public abstract class DedicatedServer {
 	 */
 	public DedicatedServer(String config, String dir){
 		serverConfig.parseFrom(Dust.getPATH() + dir+config);
+		ServerManager.addServer(this);
 	}
 	
 	/**
@@ -54,6 +55,7 @@ public abstract class DedicatedServer {
 		serverConfig.setValueAtPath("server.dir", dir);
 		serverConfig.assembleTo(dir+config);
 		this.config = Dust.getPATH()+dir+config;
+		ServerManager.addServer(this);
 	}
 	
 	/**
@@ -80,14 +82,13 @@ public abstract class DedicatedServer {
 					reader = new BufferedReader (new InputStreamReader(stdout));
 					readere = new BufferedReader (new InputStreamReader(stderr));
 					writer = new BufferedWriter(new OutputStreamWriter(stdin));
-
-					running = true;
 				} catch (IOException e) {
-					
+					e.printStackTrace();
 				}
 			}
 			
 		});
+		running = true;
 	}
 	
 	public boolean saveConfigFile(){
