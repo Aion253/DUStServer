@@ -11,6 +11,7 @@ import java.io.OutputStreamWriter;
 
 import net.aionstudios.dus.Dust;
 import net.aionstudios.ndf.ANDFTree;
+import net.aionstudios.ndf.util.ANDFFormats;
 
 public class DedicatedServer {
 	
@@ -31,7 +32,7 @@ public class DedicatedServer {
 	 * @param config The path, relative to DustServer, to a server's dust configuration file.
 	 */
 	public DedicatedServer(String config, String dir){
-		serverConfig.parseFrom(Dust.getPATH() + dir+config);
+		serverConfig.parseFrom(Dust.getPATH() + dir+config, ANDFFormats.RECURSIVE_NODE);
 		ServerManager.addServer(this);
 	}
 	
@@ -53,7 +54,7 @@ public class DedicatedServer {
 		serverConfig.setValueAtPath("server.name", name);
 		serverConfig.setValueAtPath("server.launch", launch);
 		serverConfig.setValueAtPath("server.dir", dir);
-		serverConfig.assembleTo(dir+config);
+		serverConfig.assembleTo(dir+config, ANDFFormats.RECURSIVE_NODE);
 		this.config = Dust.getPATH()+dir+config;
 		ServerManager.addServer(this);
 	}
