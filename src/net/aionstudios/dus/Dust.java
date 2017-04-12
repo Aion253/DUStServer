@@ -16,13 +16,14 @@ public class Dust {
 	
 	//Dedicated Unified Servers - DUST
 	public static void main(String[] args){
+		checkSetup();
 		Logger.setup();
 		StandardOverride.enableOverride();
 		System.out.println("Initialization Complete!");
 		PATH = getFullStartPath();
 	}
 	
-	private void checkSetup() {
+	private static void checkSetup() {
 		File log = new File(PATH+"/logs/");
 		File dt = new File(PATH+"/data/");
 		boolean not = false;
@@ -30,7 +31,7 @@ public class Dust {
 			not = true;
 		}
 		if(not){
-			System.out.println("Created Missing Server Directories...");
+			System.out.println("Created Server Directories...");
 		}
 	}
 	

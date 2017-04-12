@@ -64,7 +64,7 @@ public class DedicatedServer {
 	 * 
 	 * @param config The path, relative to DustServer, to a server's dust configuration file.
 	 */
-	private final void start(){
+	private final void start() {
 		ServerManager.getExecutor().execute(new Runnable(){
 
 			@Override
@@ -76,9 +76,9 @@ public class DedicatedServer {
 					
 					process = builder.start();
 					
-					OutputStream stdin = process.getOutputStream ();
-					InputStream stderr = process.getErrorStream ();
-					InputStream stdout = process.getInputStream ();
+					OutputStream stdin = process.getOutputStream();
+					InputStream stderr = process.getErrorStream();
+					InputStream stdout = process.getInputStream();
 					reader = new BufferedReader (new InputStreamReader(stdout));
 					readere = new BufferedReader (new InputStreamReader(stderr));
 					writer = new BufferedWriter(new OutputStreamWriter(stdin));
@@ -89,6 +89,27 @@ public class DedicatedServer {
 			
 		});
 		running = true;
+	}
+	
+	private final void stop() {
+		try {
+			writer.write("stop");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		running = false;
+	}
+	
+	private final void forceStop() {
+		try {
+			writer.write("stop");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		process.destroy();
+		running = false;
 	}
 	
 	public boolean saveConfigFile(){
